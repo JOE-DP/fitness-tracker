@@ -1,5 +1,3 @@
-const express = require('express')
-const http = require('http')
 const PORT = 5001
 const MongoClient = require('mongodb').MongoClient
 
@@ -12,6 +10,9 @@ MongoClient.connect(dbConnectorStr)
         console.log(`connected to ${dbName} database`)
         db = client.db(dbName)
     })
+
+const express = require('express')
+const http = require('http')
 
 
 let app = express()
