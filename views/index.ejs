@@ -10,14 +10,21 @@
     <h1>Fitness Tracker App</h1>
 </header>
 <body>
-    <h2>Fitness goals below:</h2>
+    <h2>Select user or create new user:</h2>
 
-    <form action="/add-ex" method="POST">
-        <input type="text" name="exercise" placeholder="Excercise Name"></input>
-        <input type="text" name="maxReps" placeholder="Maximum number of reps"></input>
-        <input type="text" name="maxWeight" placeholder="Maximum weight used"></input>
-        <input type="submit">
+    <form action="/adduser" method="POST">
+        <input type="text" name="user" placeholder="User name"></input>
+        <input type="submit" value="Update Users">
     </form>
+    
+    <% for(let i = 0; i < users.length; i++){ %>
+        <ul>
+            <li>User: <%= users[i].user %> </li>
+            <button class="del" >Delete</button>
+            <a class="userLink" href="/api/<%= users[i].user %>"><p>See Fitness Info</p></a>
+        </ul>
+        <% } %>
 
+<script src="/main.js" defer></script>
 </body>
 </html>
