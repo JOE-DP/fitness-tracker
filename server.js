@@ -1,5 +1,3 @@
-// const { urlencoded } = require('body-parser')
-// const { Console } = require('console')
 const express = require('express')
 const http = require('http')
 const PORT = 5001
@@ -52,15 +50,12 @@ app.post('/adduser', (req, res) => {
     res.redirect('/')
 })
 
-app.delete('/remove', (req, res) => {
-   db.collection('fitnessuser1').deleteOne({exercise: req.body.exTitle})
-   console.log(req.body)
-   res.json()
-})
+// app.delete('/remove', (req, res) => {
+//    db.collection('fitnessuser1').deleteOne({exercise: req.body.exTitle})
+//    console.log(req.body)
+//    res.json()
+// })
 
-
-
-
-app.listen(process.env.PORT|| PORT, () => {
+app.listen(process.env.PORT || PORT, () => {
     console.log(`server running on port: ${PORT}`)
 })
