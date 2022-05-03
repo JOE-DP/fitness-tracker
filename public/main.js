@@ -1,13 +1,26 @@
-let delButton = Array.from(document.querySelectorAll('.delEx'))
-delButton.forEach(element => element.addEventListener('click', delFunct))
+let delButtonUser = Array.from(document.querySelectorAll('.delUser'))
+delButtonUser.forEach(element => element.addEventListener('click', delUserFunct))
 
-function delFunct(click){
-    const exName = click.target.parentElement.firstElementChild.innerText.split(":")[1]
-    fetch('/remove', {method: 'delete', 
+function delUserFunct(click){
+    const userName = click.target.parentElement.firstElementChild.innerText.split(":")[1]
+    fetch('/removeUser', {method: 'delete', 
     headers: {'Content-Type':'application/JSON'},
-    body: JSON.stringify({'exTitle': exName})})
+    body: JSON.stringify({'removeName':userName})})
         .then(() => {
-        console.log(exName)
+        location.reload()
+    }) 
+}
+
+let delButtonEx = Array.from(document.querySelectorAll('.delEx'))
+delButtonEx.forEach(element => element.addEventListener('click', delExFunct))
+
+function delExFunct(click){
+    const exerciseRemove = click.target.parentElement.firstElementChild.innerText.split(":")[1]
+    console.log(exerciseRemove)
+    fetch('/removeExercise', {method: 'delete', 
+    headers: {'Content-Type':'application/JSON'},
+    body: JSON.stringify({'removeEx':exerciseRemove})})
+        .then(() => {
         location.reload()
     }) 
 }

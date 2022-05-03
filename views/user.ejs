@@ -4,30 +4,37 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700&display=swap" rel="stylesheet">      
     <link rel="stylesheet" href="/styles.css">
     <title>Fitness-Tracker</title>
+    <a href="/"><button class="home">home</button></a>
 </head>
 <header>
-    <h1>Fitness Tracker App <%- info[0].user %></h1>
+    <h1>Fitness Tracker App</h1>
 </header>
 <body>
-
+<section class="section-bubble">
+    <h2>User Name: <%- info[0].user %></h2>
 
     <form action="/add-ex" method="POST">
         <input type="text" class="hidden" value="<%- info[0].user %>" name="fitnessName">
         <input type="text" name="exercise" placeholder="Exercise Name"></input>
         <input type="text" name="maxReps" placeholder="Maximum number of reps"></input>
         <input type="text" name="maxWeight" placeholder="Maximum weight used"></input>
-        <input type="submit" value="Update">
+        <input type="submit" value="Update" class="button">
     </form>
+</section>
+
     <% for(let i = 0; i < info.length; i++){ 
         if(info[i].fitnessName == info[0].user){ %>
         
-<ul>
+<ul class="section-bubble">
     <li>Exercise:<%= info[i].exercise %></li>
     <li>Maximum Reps: <%= info[i].maxReps %></li>
-    <li>Maximum Weight: <%= info[i].maxWeight %></li>
-    <button class="delEx" >Delete</button>
+    <li class="last-item">Maximum Weight: <%= info[i].maxWeight %></li>
+    <button class="delEx">Delete</button>
 </ul>
 <% }} %>
 

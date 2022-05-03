@@ -1,4 +1,5 @@
 const PORT = 5001
+const { json } = require('body-parser');
 const express = require('express')
 const http = require('http')
 const MongoClient = require('mongodb').MongoClient
@@ -25,17 +26,14 @@ app.get('/', (req, res) => {
     db.collection('fitnessUsers').find().toArray()
         .then(data => {
             data = data.filter(data => !data.fitnessName)
-            console.log(data)
             res.render('index.ejs', {users : data})})
     
 })
 app.get('/api/:userInfo', (req, res) => {
     let user = req.params.userInfo
-    console.log(user)
     db.collection('fitnessUsers').find().toArray()
         .then(data => {
             data = data.filter(data => data.user == user || data.fitnessName == user)
-            console.log(data)
             res.render('user.ejs', {info : data})})
 })
 
@@ -50,11 +48,16 @@ app.post('/adduser', (req, res) => {
     res.redirect('/')
 })
 
-// app.delete('/remove', (req, res) => {
-//    db.collection('fitnessuser1').deleteOne({exercise: req.body.exTitle})
-//    console.log(req.body)
-//    res.json()
-// })
+app.delete('/removeUser', (req, res) => {
+   db.collection('fitnessUsers').deleteOne({user: req.body.removeName.trim()})
+   res.json()
+})
+
+app.delete('/removeExercise', (req, res) => {
+    let user = req.params.userInfo
+   db.collection('fitnessUsers').deleteOne({exercise: req.body.removeEx})
+   res.json()
+})
 
 app.listen(process.env.PORT || PORT, () => {
     console.log(`server running on port: ${PORT}`)
