@@ -30,7 +30,7 @@ app.use(express.static('public'))
 app.get('/', (req, res) => {
     db.collection('fitnessUsers').find().toArray()
         .then(data => {
-            data = data.filter(data => !data.fitnessName)
+            data = data.filter(data => data.user)
             res.render('index.ejs', {users : data})})
     
 })
@@ -39,6 +39,10 @@ app.get('/', (req, res) => {
 
 app.get('/api/:userInfo', (req, res) => {
     let user = req.params.userInfo
+
+    db.collection('fitnessUsers').find().toArray()
+        .then(data => console.log(data.filter(data => data.user == user || data.fitnessName == user)))
+
     db.collection('fitnessUsers').find().toArray()
         .then(data => {
             data = data.filter(data => data.user == user || data.fitnessName == user)
