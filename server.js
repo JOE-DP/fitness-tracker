@@ -6,9 +6,10 @@ const http = require('http')
 const MongoClient = require('mongodb').MongoClient
 
 // connect to Mongo DB
+require('dotenv').config()
 
 let db;
-let dbConnectorStr = 'mongodb+srv://fitnessAdmin:fitnesspass@cluster0.dh91y.mongodb.net/fitnesstracker?retryWrites=true&w=majority'
+let dbConnectorStr = process.env.DB_STRING
 let dbName = 'fitnessDB'
 
 MongoClient.connect(dbConnectorStr)
@@ -39,10 +40,6 @@ app.get('/', (req, res) => {
 
 app.get('/api/:userInfo', (req, res) => {
     let user = req.params.userInfo
-
-    db.collection('fitnessUsers').find().toArray()
-        .then(data => console.log(data.filter(data => data.user == user || data.fitnessName == user)))
-
     db.collection('fitnessUsers').find().toArray()
         .then(data => {
             data = data.filter(data => data.user == user || data.fitnessName == user)
