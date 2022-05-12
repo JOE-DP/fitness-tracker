@@ -1,6 +1,5 @@
 // import required modules
 
-const { json } = require('body-parser');
 const express = require('express')
 const http = require('http')
 const MongoClient = require('mongodb').MongoClient
